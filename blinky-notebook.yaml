@@ -1,0 +1,20 @@
+version: "3.7"
+services:
+  jupyter:
+    image: blinkylite/blinky-notebook:${DOCKER_TAG}
+    container_name: blinky-notebook
+    restart: always
+    volumes:
+      - notebooks:/home/jovyan/work
+    ports:
+      - "8888:8888"
+    environment:
+      - JUPYTER_TOKEN=${JUPYTER_TOKEN}
+networks:
+  default:
+    name: tunnel
+    external: true
+volumes:
+  notebooks:
+    driver: local  
+  
