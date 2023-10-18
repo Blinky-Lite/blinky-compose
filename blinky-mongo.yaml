@@ -1,7 +1,7 @@
 version: "3.7"
 services:
   mongo:
-    image: blinkylite/blinky-mongo:5.0
+    image: blinkylite/blinky-mongo:${DOCKER_TAG}
     restart: always
     command: mongod --quiet --logpath /dev/null
     container_name: blinky-mongo
