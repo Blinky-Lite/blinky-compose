@@ -1,0 +1,28 @@
+version: "3.7"
+services:
+  mongo:
+    image: blinkylite/blinky-mongo:5.0
+    command: mongod --quiet --logpath /dev/null
+    container_name: blinky-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=${BLINKYLITE_PASSWORD}
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongo blinky-mongo:27017/test --quiet
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
+volumes:
+  mongo-data:
+    driver: local  
+networks:
+  default:
+    name: tunnel
+    external: true
+
+
