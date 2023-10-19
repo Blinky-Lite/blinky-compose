@@ -1,0 +1,38 @@
+version: "3.7"
+services:
+  blinky-box:
+    image: blinkylite/blinky-lite-box:${DOCKER_TAG}
+    container_name: blinky-box
+    ports:
+      - "${BLINKYPORT}:60427"
+    volumes:
+      - /home/pi/blinky-box-config/index.html:/data/html-static/index.html
+      - /home/pi/blinky-box-config/homepage:/data/html-static/homepage
+      - /home/pi/blinky-box-config/blinky-lite-icons:/data/html-static/img
+      - /home/pi/blinky-box-config/mqtt-auth:/data/mqtt-auth
+      - /home/pi/blinky-box-config/boxColorScheme.css:/data/html-static/css/boxColorScheme.css
+    environment:
+      - BOX=${BOX}
+      - MONGODBIP=mongodb://admin:${BLINKYLITE_PASSWORD}@blinky-mongo:27017/blinky-lite?retryWrites=true&serverSelectionTimeoutMS=5000&connectTimeoutMS=10000&authSource=admin&authMechanism=SCRAM-SHA-256
+      - MQTTCLIENTID=${BOX}
+      - MQTTSERVERIP=blinky-mqtt
+      - MQTTUSERNAME=${BOX}
+      - MQTTPASSWORD=${BLINKYLITE_PASSWORD}
+      - MQTTPORT=${MQTTPORT}
+      - MQTTACLDATADIR=/data/mqtt-auth
+      - TELBOT=${TELBOT}
+      - JWTKEYSECRET=${JWTKEYSECRET}
+      - MAXDBSIZE=${MAXDBSIZE}
+      - IPREFWEB=https://www.blinky-lite.se
+      - TWOFA=${TWOFA}
+      - ENABLEARCHIVE=${ENABLEARCHIVE}
+      - NODEREDPORT=60427
+      - HTMLSTATICDIR=/data/html-static
+      - REQUIREHTTPS=${REQUIREHTTPS}
+      - ENABLE_NODERED_EDITOR=0
+networks:
+  default:
+    name: tunnel
+    external: true
+
+
