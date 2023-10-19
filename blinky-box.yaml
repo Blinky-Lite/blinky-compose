@@ -3,6 +3,7 @@ services:
   blinky-box:
     image: blinkylite/blinky-lite-box:${DOCKER_TAG}
     container_name: blinky-box
+    user: 1000:1000
     ports:
       - "${BLINKYPORT}:60427"
     volumes:
