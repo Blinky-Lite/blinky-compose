@@ -3,6 +3,7 @@ services:
   mqtt:
     image: blinkylite/blinky-mqtt:5.0${HARDWARE}
     container_name: blinky-mqtt
+    user: root
     ports:
       - "${MQTTPORT}:1883"
       - "9001:9001"
