@@ -1,7 +1,7 @@
 version: "3.7"
 services:
   mqtt:
-    image: blinkylite/blinky-mqtt:5.0
+    image: blinkylite/blinky-mqtt:5.0${HARDWARE}
     container_name: blinky-mqtt
     ports:
       - "${MQTTPORT}:1883"
