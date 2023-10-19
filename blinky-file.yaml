@@ -1,0 +1,16 @@
+version: "3.7"
+services:
+  filebrowser:
+    image: filebrowser/filebrowser
+    restart: always
+    container_name: blinky-file
+    ports:
+      - "${PORT}:80"
+    volumes:
+      - /home/pi:/srv
+networks:
+  default:
+    name: tunnel
+    external: true
+
+
