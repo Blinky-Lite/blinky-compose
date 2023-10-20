@@ -1,7 +1,8 @@
 version: "3.7"
 services:
   mqtt:
-    image: blinkylite/blinky-mqtt:5.0${HARDWARE}
+    image: blinkylite/blinky-mqtt:${DOCKER_TAG}
+    restart: unless-stopped
     container_name: blinky-mqtt
     user: root
     ports:

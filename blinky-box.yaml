@@ -1,7 +1,8 @@
 version: "3.7"
 services:
   blinky-box:
-    image: blinkylite/blinky-lite-box:${DOCKER_TAG}
+    image: blinkylite/blinky-box:${DOCKER_TAG}
+    restart: unless-stopped
     container_name: blinky-box
     user: root
     ports:
@@ -30,7 +31,7 @@ services:
       - NODEREDPORT=60427
       - HTMLSTATICDIR=/data/html-static
       - REQUIREHTTPS=${REQUIREHTTPS}
-      - ENABLE_NODERED_EDITOR=0
+      - ENABLE_NODERED_EDITOR=${ENABLE_NODERED_EDITOR}
 networks:
   default:
     name: tunnel

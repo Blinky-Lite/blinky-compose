@@ -3,13 +3,13 @@ services:
   jupyter:
     image: blinkylite/blinky-notebook:${DOCKER_TAG}
     container_name: blinky-notebook
-    restart: always
+    restart: unless-stopped
     volumes:
       - notebooks:/home/jovyan/work
     ports:
       - "8888:8888"
     environment:
-      - JUPYTER_TOKEN=${JUPYTER_TOKEN}
+      - JUPYTER_TOKEN=${BLINKYLITE_PASSWORD}
 networks:
   default:
     name: tunnel

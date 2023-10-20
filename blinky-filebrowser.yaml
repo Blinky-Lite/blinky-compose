@@ -1,7 +1,7 @@
 version: "3.7"
 services:
   filebrowser:
-    image: filebrowser/filebrowser
+    image: blinkylite/filebrowser:${DOCKER_TAG}
     restart: unless-stopped
     container_name: blinky-file
     ports:
