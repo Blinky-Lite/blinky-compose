@@ -9,7 +9,7 @@ services:
       - "${BLINKYPORT}:60427"
     volumes:
       - /home/pi/blinky-box-config/index.html:/data/html-static/index.html
-      - /home/pi/blinky-box-config/homepage:/data/html-static/homepage
+      - /home/pi/blinky-box-config/${LAUNCH_PAGE_FILE_DIR}:/data/html-static/${LAUNCH_PAGE_FILE_DIR}
       - /home/pi/blinky-box-config/blinky-lite-icons:/data/html-static/img
       - /home/pi/blinky-box-config/mqtt-auth:/data/mqtt-auth
       - /home/pi/blinky-box-config/boxColorScheme.css:/data/html-static/css/boxColorScheme.css
