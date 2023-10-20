@@ -1,0 +1,24 @@
+version: "3.7"
+services:
+  blinky-MAX31865-trays:
+    image: blinkylite/blinky-max31865-trays:${DOCKER_TAG}
+    restart: unless-stopped
+    container_name: blinky-max31865-trays
+    ports:
+      - "${NODEREDPORT}:60428"
+    environment:
+      - BOX=${BOX}
+      - TRAYTYPE=${TRAYTYPE}
+      - MQTTCLIENTID=${BOX}-${TRAYTYPE}
+      - MQTTSERVERIP=${MQTTSERVERIP}
+      - MQTTUSERNAME=${BOX}
+      - MQTTPASSWORD=${MQTTPASSWORD}
+      - MQTTPORT=${MQTTPORT}
+      - NODEREDPORT=60428
+      - ENABLE_NODERED_EDITOR=${ENABLE_NODERED_EDITOR}
+networks:
+  default:
+    name: tunnel
+    external: true
+
+
