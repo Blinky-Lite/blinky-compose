@@ -9,7 +9,7 @@ services:
       - "${PORT}:8080"
     volumes:
       - /home/pi:/srv
-      - /home/pi/database.db:/database.db
+#      - /home/pi/database.db:/database.db
 networks:
   default:
     name: tunnel
