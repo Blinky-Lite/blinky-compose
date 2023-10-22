@@ -23,6 +23,7 @@ services:
       - MQTTPORT=${MQTTPORT}
       - MQTTACLDATADIR=/data/mqtt-auth
       - TELBOT=${TELBOT}
+      - TELEGRAM_TIMEOUT=${TELEGRAM_TIMEOUT}
       - JWTKEYSECRET=${JWTKEYSECRET}
       - MAXDBSIZE=${MAXDBSIZE}
       - IPREFWEB=https://www.blinky-lite.se
