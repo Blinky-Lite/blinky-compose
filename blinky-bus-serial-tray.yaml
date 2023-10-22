@@ -1,0 +1,33 @@
+version: "3.7"
+services:
+  blinky-bus-serial-tray:
+    image: blinkylite/blinky-bus-serial-tray:${DOCKER_TAG}
+    restart: unless-stopped
+    container_name: blinky-bus-serial-tray
+    group_add:
+      - dialout
+    devices:
+      - ${SERIALPORT}:/dev/ttyACM0
+    ports:
+      - "${NODEREDPORT}:1881"
+    environment:
+      - BOX=${BOX}
+      - TRAYTYPE=${TRAYTYPE}
+      - TRAYNAME=${TRAYNAME}
+      - MQTTCLIENTID=${MQTTCLIENTID}
+      - MQTTSERVERIP=${MQTTSERVERIP}
+      - MQTTUSERNAME=${MQTTUSERNAME}
+      - MQTTPASSWORD=${MQTTPASSWORD}
+      - MQTTPORT=${MQTTPORT}
+      - SERIALBUFSIZE=${SERIALBUFSIZE}
+      - POLLINTERVAL=${POLLINTERVAL}
+      - BAUDRATE=${BAUDRATE}
+      - SERIALPORT=/dev/ttyACM0
+      - NODEREDPORT=1881
+      - ENABLE_NODERED_EDITOR=${ENABLE_NODERED_EDITOR}
+networks:
+  default:
+    name: tunnel
+    external: true
+
+
