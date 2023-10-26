@@ -1,0 +1,28 @@
+version: "3.7"
+services:
+  blinky-modbus-tray:
+    image: blinkylite/blinky-modbus-tray:${DOCKER_TAG}
+    restart: unless-stopped
+    container_name: blinky-modbus-tray-${TRAYNAME}
+    ports:
+      - "${NODEREDPORT}:1880"
+    environment:
+      - BOX=${BOX}
+      - TRAYTYPE=${TRAY}
+      - TRAYNAME=${TRAYNAME}
+      - MQTTCLIENTID=${MQTTCLIENTID}
+      - MQTTSERVERIP=${MQTTSERVERIP}
+      - MQTTUSERNAME=${MQTTUSERNAME}
+      - MQTTPASSWORD=${MQTTPASSWORD}
+      - MQTTPORT=${MQTTPORT}
+      - TESTMODE=${TESTMODE}
+      - MODBUSIP=${MODBUSIP}
+      - MODBUSPORT=${MODBUSPORT}
+      - NODEREDPORT=1880
+      - ENABLE_NODERED_EDITOR=${ENABLE_NODERED_EDITOR}
+networks:
+  default:
+    name: tunnel
+    external: true
+
+
