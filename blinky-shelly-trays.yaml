@@ -1,0 +1,25 @@
+version: "3.7"
+services:
+  blinky-shelly-trays:
+    image: blinkylite/blinky-shelly-trays:${DOCKER_TAG}
+    restart: unless-stopped
+    container_name: blinky-shelly-trays-01
+    ports:
+      - "${NODEREDPORT}:60429"
+    environment:
+      - BOX=${BOX}
+      - MQTTCLIENTID=${MQTTCLIENTID}
+      - MQTTSERVERIP=${MQTTSERVERIP}
+      - MQTTUSERNAME=${MQTTUSERNAME}
+      - MQTTPASSWORD=${MQTTPASSWORD}
+      - MQTTPORT=${MQTTPORT}
+      - SHELLYMQTTLEAD=${SHELLYMQTTLEAD}
+      - ADMINNAME=admin
+      - NODEREDPORT=60429
+      - ENABLE_NODERED_EDITOR=${ENABLE_NODERED_EDITOR}
+networks:
+  default:
+    name: tunnel
+    external: true
+
+
