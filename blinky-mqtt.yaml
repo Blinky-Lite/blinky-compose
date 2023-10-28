@@ -4,15 +4,18 @@ services:
     image: blinkylite/blinky-mqtt:${DOCKER_TAG}
     restart: unless-stopped
     container_name: blinky-mqtt
-    user: root
+    environment:
+      - BOX=${BOX}
+      - HUB=${HUB}
+      - BLINKYLITE_PASSWORD=${BLINKYLITE_PASSWORD}
+      - REMOTE_MQTTSERVER=${REMOTE_MQTTSERVER}
+      - REMOTE_MQTTUSER=${REMOTE_MQTTUSER}
+      - REMOTE_MQTTPASSWORD=${REMOTE_MQTTPASSWORD}
+      - EXTRA_HUB_TOPIC1=${EXTRA_HUB_TOPIC1}
+      - EXTRA_HUB_TOPIC2=${EXTRA_HUB_TOPIC2}
     ports:
       - "${MQTTPORT}:1883"
-      - "9001:9001"
-    volumes:
-      - /home/pi/blinky-box-config/mqtt-auth:/mqtt-auth
 networks:
   default:
     name: tunnel
     external: true
-
-
