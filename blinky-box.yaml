@@ -4,15 +4,8 @@ services:
     image: blinkylite/blinky-box:${DOCKER_TAG}
     restart: unless-stopped
     container_name: blinky-box
-    user: 1000:1000
     ports:
       - "${BLINKYPORT}:60427"
-    volumes:
-      - /home/pi/blinky-box-config/index.html:/data/html-static/index.html
-      - /home/pi/blinky-box-config/${LAUNCH_PAGE_FILE_DIR}:/data/html-static/${LAUNCH_PAGE_FILE_DIR}
-      - /home/pi/blinky-box-config/blinky-lite-icons:/data/html-static/img
-      - /home/pi/blinky-box-config/mqtt-auth:/data/mqtt-auth
-      - /home/pi/blinky-box-config/boxColorScheme.css:/data/html-static/css/boxColorScheme.css
     environment:
       - BOX=${BOX}
       - MONGODBIP=mongodb://admin:${BLINKYLITE_PASSWORD}@blinky-mongo:27017/blinky-lite?retryWrites=true&serverSelectionTimeoutMS=5000&connectTimeoutMS=10000&authSource=admin&authMechanism=SCRAM-SHA-256
@@ -21,7 +14,6 @@ services:
       - MQTTUSERNAME=${BOX}
       - MQTTPASSWORD=${BLINKYLITE_PASSWORD}
       - MQTTPORT=${MQTTPORT}
-      - MQTTACLDATADIR=/data/mqtt-auth
       - TELBOT=${TELBOT}
       - TELEGRAM_TIMEOUT=${TELEGRAM_TIMEOUT}
       - JWTKEYSECRET=${JWTKEYSECRET}
