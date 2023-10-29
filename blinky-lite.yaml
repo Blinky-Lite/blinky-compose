@@ -1,0 +1,122 @@
+version: "3.7"
+services:
+  mongo:
+    image: blinkylite/blinky-mongo:${DOCKER_TAG}
+    restart: unless-stopped
+    command: mongod --quiet --logpath /dev/null
+    container_name: blinky-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=${BLINKYLITE_PASSWORD}
+    healthcheck:
+      test: echo 'db.runCommand("ping").ok' | mongo blinky-mongo:27017/test --quiet
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
+  mongo-express:
+    image: blinkylite/mongo-express:${DOCKER_TAG}
+    container_name: blinky-mongo-express
+    restart: unless-stopped
+    depends_on:
+      mongo:
+        condition: service_healthy
+    ports:
+      - "8081:8081"
+    environment:
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=admin
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=${BLINKYLITE_PASSWORD}
+      - ME_CONFIG_MONGODB_SERVER=blinky-mongo
+      - ME_CONFIG_MONGODB_ENABLE_ADMIN=true
+      - ME_CONFIG_BASICAUTH_USERNAME=admin
+      - ME_CONFIG_BASICAUTH_PASSWORD=${BLINKYLITE_PASSWORD}
+  mqtt:
+    image: blinkylite/blinky-mqtt:${DOCKER_TAG}
+    restart: unless-stopped
+    container_name: blinky-mqtt
+    environment:
+      - BOX=${BOX}
+      - HUB=blinky-hub
+      - BLINKYLITE_PASSWORD=${BLINKYLITE_PASSWORD}
+      - REMOTE_MQTTSERVER=${REMOTE_MQTTSERVER}
+      - REMOTE_MQTTUSER=${REMOTE_MQTTUSER}
+      - REMOTE_MQTTPASSWORD=${REMOTE_MQTTPASSWORD}
+      - EXTRA_HUB_TOPIC1=${EXTRA_HUB_TOPIC1}
+      - EXTRA_HUB_TOPIC2=none
+    ports:
+      - "1883:1883"
+  blinky-box:
+    image: blinkylite/blinky-box:${DOCKER_TAG}
+    restart: unless-stopped
+    container_name: blinky-box
+    depends_on:
+      mongo:
+        condition: service_healthy
+    ports:
+      - "60427:60427"
+    environment:
+      - BOX=${BOX}
+      - MONGODBIP=mongodb://admin:${BLINKYLITE_PASSWORD}@blinky-mongo:27017/blinky-lite?retryWrites=true&serverSelectionTimeoutMS=5000&connectTimeoutMS=10000&authSource=admin&authMechanism=SCRAM-SHA-256
+      - MQTTCLIENTID=${BOX}
+      - MQTTSERVERIP=blinky-mqtt
+      - MQTTUSERNAME=${BOX}
+      - MQTTPASSWORD=${BLINKYLITE_PASSWORD}
+      - MQTTPORT=1883
+      - TELBOT=${TELBOT}
+      - TELEGRAM_TIMEOUT=60000
+      - JWTKEYSECRET=${JWTKEYSECRET}
+      - MAXDBSIZE=${MAXDBSIZE}
+      - IPREFWEB=https://www.blinky-lite.se
+      - TWOFA=${TWOFA}
+      - ENABLEARCHIVE=1
+      - NODEREDPORT=60427
+      - HTMLSTATICDIR=/data/html-static
+      - REQUIREHTTPS=0
+      - ENABLE_NODERED_EDITOR=0
+    healthcheck:
+      test: curl --fail http://localhost:60427/health || exit 1
+      interval: 3s
+      timeout: 3s
+      retries: 15
+      start_period: 3s
+  blinky-mqtt-trays:
+    image: blinkylite/blinky-mqtt-trays:${DOCKER_TAG}
+    restart: unless-stopped
+    container_name: blinky-mqtt-trays
+    ports:
+      - "60428:60428"
+    environment:
+      - BOX=${BOX}
+      - TRAYTYPE=blinky-mqtt
+      - MQTTCLIENTID=${BOX}-blinky-mqtt
+      - MQTTSERVERIP=blinky-mqtt
+      - MQTTUSERNAME=${BOX}
+      - MQTTPASSWORD=${BLINKYLITE_PASSWORD}
+      - MQTTPORT=1883
+      - NODEREDPORT=60428
+      - ENABLE_NODERED_EDITOR=0
+  jupyter:
+    image: blinkylite/blinky-notebook:${DOCKER_TAG}
+    container_name: blinky-notebook
+    restart: unless-stopped
+    volumes:
+      - notebooks:/home/jovyan/work
+    ports:
+      - "8888:8888"
+    environment:
+      - JUPYTER_TOKEN=${BLINKYLITE_PASSWORD}
+volumes:
+  mongo-data:
+    driver: local  
+  notebooks:
+    driver: local  
+networks:
+  default:
+    name: tunnel
+    external: true
+
+
