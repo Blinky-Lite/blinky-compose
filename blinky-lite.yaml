@@ -87,6 +87,9 @@ services:
     image: blinkylite/blinky-mqtt-trays:${DOCKER_TAG}
     restart: unless-stopped
     container_name: blinky-mqtt-trays
+    depends_on:
+      blinky:
+        condition: service_healthy
     ports:
       - "60428:60428"
     environment:
