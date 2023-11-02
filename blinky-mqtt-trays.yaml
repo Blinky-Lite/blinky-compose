@@ -3,17 +3,17 @@ services:
   blinky-mqtt-trays:
     image: blinkylite/blinky-mqtt-trays:${DOCKER_TAG}
     restart: unless-stopped
-    container_name: blinky-mqtt-trays
+    container_name: blinky-mqtt-trays-${TRAY_TYPE}
     ports:
       - "${NODEREDPORT}:60428"
     environment:
       - BOX=${BOX}
       - TRAYTYPE=${TRAYTYPE}
       - MQTTCLIENTID=${BOX}-${TRAYTYPE}
-      - MQTTSERVERIP=${MQTTSERVERIP}
+      - MQTTSERVERIP=blinky-mqtt
       - MQTTUSERNAME=${BOX}
       - MQTTPASSWORD=${MQTTPASSWORD}
-      - MQTTPORT=${MQTTPORT}
+      - MQTTPORT=1883
       - NODEREDPORT=60428
       - ENABLE_NODERED_EDITOR=${ENABLE_NODERED_EDITOR}
 networks:
