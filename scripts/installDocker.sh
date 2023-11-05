@@ -20,6 +20,5 @@ sudo usermod -aG docker $USER
 source ~/.bashrc 
 wget https://github.com/Blinky-Lite/blinky-compose/raw/main/scripts/startPortainer.sh
 chmod +x startPortainer.sh 
-./startPortainer.sh $1
 sudo echo '....Finished installing docker' 
 
