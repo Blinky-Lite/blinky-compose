@@ -1,4 +1,11 @@
 #!/bin/bash
+if [ $(expr length "$1") -lt 12 ]
+then
+    echo "Password must be at least 12 characters long"
+    echo "Docker not installed!"
+    echo "exiting script"
+    exit 1
+fi
 # Add Docker's official GPG key:
 sudo echo 'Installing Docker....'
 sudo apt-get update
@@ -13,15 +20,11 @@ echo \
   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 sudo apt-get update
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-sudo usermod -aG docker $USER
-# get bashrc to load user mod
-eval "$(cat ~/.bashrc | tail -n +10)"
+#sudo usermod -aG docker $USER
 sudo docker network create tunnel 
-
-docker run hello-world
-
 sudo apt install apache2-utils 
 wget https://github.com/Blinky-Lite/blinky-compose/raw/main/scripts/startPortainer.sh
 chmod +x startPortainer.sh 
-sudo echo '....Finished installing docker...exit terminal and login again' 
+./startPortainer.sh $1
+echo '....Finished installing docker...exit terminal and login again' 
 

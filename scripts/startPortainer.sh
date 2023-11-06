@@ -1,6 +1,6 @@
 #!/bin/bash
-portainerIde=$(docker container ls -a -q --filter "name=portainer")
-portainerIdr=$(docker container ls -q --filter "name=portainer")
+portainerIde=$(sudo docker container ls -a -q --filter "name=portainer")
+portainerIdr=$(sudo docker container ls -q --filter "name=portainer")
 if [ $(expr length "$portainerIde") -gt 10 ]
 then
     echo "portainer exists"
@@ -10,7 +10,7 @@ then
         echo "exiting script"
     else
         echo "restarting portainer"
-        docker container start $portainerIde
+        sudo docker container start $portainerIde
         echo "exiting script"
     fi
 else
@@ -18,7 +18,7 @@ else
     then
         echo "Creating portainer"
             pw=$(htpasswd -bnBC 10 "" $1 | tr -d ':\n')
-            docker run -d -p 8000:8000 -p 9000:9000 --name portainer --network tunnel --restart=unless-stopped \
+            sudo docker run -d -p 8000:8000 -p 9000:9000 --name portainer --network tunnel --restart=unless-stopped \
                 -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer-ce:latest \
                 --admin-password=$pw --http-enabled \
                 --logo https://raw.githubusercontent.com/Blinky-Lite/blinky-compose/main/images/BlinkyLogoName.png        
