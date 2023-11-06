@@ -16,6 +16,9 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin 
 sudo usermod -aG docker $USER
 source ~/.bashrc 
 sudo docker network create tunnel 
+
+docker run hello-world
+
 sudo apt install apache2-utils 
 wget https://github.com/Blinky-Lite/blinky-compose/raw/main/scripts/startPortainer.sh
 chmod +x startPortainer.sh 
