@@ -14,7 +14,8 @@ echo \
 sudo apt-get update
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 sudo usermod -aG docker $USER
-source ~/.bashrc 
+# get bashrc to load user mod
+eval "$(cat ~/.bashrc | tail -n +10)"
 sudo docker network create tunnel 
 
 docker run hello-world
