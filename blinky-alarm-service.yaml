@@ -1,0 +1,25 @@
+version: "3.7"
+services:
+  blinky-alarm-service:
+    image: blinkylite/blinky-alarm-service:${DOCKER_TAG}
+    restart: unless-stopped
+    container_name: blinky-alarm-service
+    ports:
+      - "${NODEREDPORT}:60426"
+    environment:
+      - BOX=${BOX}
+      - MQTTCLIENTID=${MQTTCLIENTID}
+      - MQTTSERVERIP=${MQTTSERVERIP}
+      - MQTTUSERNAME=${MQTTUSERNAME}
+      - MQTTPASSWORD=${MQTTPASSWORD}
+      - MQTTPORT=${MQTTPORT}
+      - HUB=${HUB}
+      - TELEGRAM_BOT=${TELEGRAM_BOT}
+      - NODEREDPORT=60426
+      - ENABLE_NODERED_EDITOR=${ENABLE_NODERED_EDITOR}
+networks:
+  default:
+    name: tunnel
+    external: true
+
+

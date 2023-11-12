@@ -40,7 +40,7 @@ services:
     container_name: blinky-mqtt
     environment:
       - BOX=${BOX}
-      - HUB=blinky-hub
+      - HUB=${HUB}
       - BLINKYLITE_PASSWORD=${BLINKYLITE_PASSWORD}
       - REMOTE_MQTTSERVER=${REMOTE_MQTTSERVER}
       - REMOTE_MQTTUSER=${REMOTE_MQTTUSER}
@@ -66,8 +66,8 @@ services:
       - MQTTUSERNAME=${BOX}
       - MQTTPASSWORD=${BLINKYLITE_PASSWORD}
       - MQTTPORT=1883
-      - TELBOT=${TELBOT}
-      - TELEGRAM_TIMEOUT=60000
+      - HUB=${HUB}
+      - ALARM_TIMEOUT=60000
       - JWTKEYSECRET=${JWTKEYSECRET}
       - MAXDBSIZE=${MAXDBSIZE}
       - IPREFWEB=https://www.blinky-lite.se
