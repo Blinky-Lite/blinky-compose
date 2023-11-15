@@ -4,8 +4,8 @@ services:
     image: blinkylite/blinky-box:${DOCKER_TAG}
     restart: unless-stopped
     container_name: blinky-box
-    ports:
-      - "${BLINKYPORT}:60427"
+#    ports:
+#      - "${BLINKYPORT}:60427"
     environment:
       - BOX=${BOX}
       - MONGODBIP=mongodb://admin:${BLINKYLITE_PASSWORD}@blinky-mongo:27017/blinky-lite?retryWrites=true&serverSelectionTimeoutMS=5000&connectTimeoutMS=10000&authSource=admin&authMechanism=SCRAM-SHA-256

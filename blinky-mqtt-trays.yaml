@@ -4,8 +4,8 @@ services:
     image: blinkylite/blinky-mqtt-trays:${DOCKER_TAG}
     restart: unless-stopped
     container_name: blinky-mqtt-trays-${TRAYTYPE}
-    ports:
-      - "${NODEREDPORT}:60428"
+#    ports:
+#      - "${NODEREDPORT}:60428"
     environment:
       - BOX=${BOX}
       - TRAYTYPE=${TRAYTYPE}

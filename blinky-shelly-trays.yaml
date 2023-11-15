@@ -4,8 +4,8 @@ services:
     image: blinkylite/blinky-shelly-trays:${DOCKER_TAG}
     restart: unless-stopped
     container_name: blinky-shelly-trays-01
-    ports:
-      - "${NODEREDPORT}:60429"
+#    ports:
+#      - "${NODEREDPORT}:60429"
     environment:
       - BOX=${BOX}
       - MQTTCLIENTID=${MQTTCLIENTID}

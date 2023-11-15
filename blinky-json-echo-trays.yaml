@@ -4,8 +4,8 @@ services:
     image: blinkylite/blinky-json-echo-trays:${DOCKER_TAG}
     restart: unless-stopped
     container_name: blinky-json-echo-trays-${TRAY_TYPE}
-    ports:
-      - "${NODEREDPORT}:60437"
+#    ports:
+#      - "${NODEREDPORT}:60437"
     environment:
       - BOX=${BOX}
       - TRAY_TYPE=${TRAY_TYPE}

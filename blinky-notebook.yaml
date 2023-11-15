@@ -6,8 +6,8 @@ services:
     restart: unless-stopped
     volumes:
       - notebooks:/home/jovyan/work
-    ports:
-      - "8888:8888"
+#    ports:
+#      - "8888:8888"
     environment:
       - JUPYTER_TOKEN=${BLINKYLITE_PASSWORD}
 networks:

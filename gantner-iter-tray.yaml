@@ -4,8 +4,8 @@ services:
     image: blinkylite/gantner-iter-tray:${DOCKER_TAG}
     restart: unless-stopped
     container_name: gantner-iter-tray-${TRAYNAME}
-    ports:
-      - "${NODEREDPORT}:1880"
+#    ports:
+#      - "${NODEREDPORT}:1880"
     environment:
       - BOX=${BOX}
       - TRAYTYPE=${TRAY}

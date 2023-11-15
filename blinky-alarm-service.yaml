@@ -4,8 +4,8 @@ services:
     image: blinkylite/blinky-alarm-service:${DOCKER_TAG}
     restart: unless-stopped
     container_name: blinky-alarm-service
-    ports:
-      - "${NODEREDPORT}:60426"
+#    ports:
+#      - "${NODEREDPORT}:60426"
     environment:
       - BOX=${BOX}
       - MQTTCLIENTID=${MQTTCLIENTID}
