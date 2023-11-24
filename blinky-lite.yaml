@@ -83,16 +83,6 @@ services:
       timeout: 3s
       retries: 15
       start_period: 3s
-  jupyter:
-    image: blinkylite/blinky-notebook:${DOCKER_TAG}
-    container_name: blinky-notebook
-    restart: unless-stopped
-    volumes:
-      - notebooks:/home/jovyan/work
-#    ports:
-#      - "8888:8888"
-    environment:
-      - JUPYTER_TOKEN=${BLINKYLITE_PASSWORD}
 volumes:
   mongo-data:
     driver: local  
