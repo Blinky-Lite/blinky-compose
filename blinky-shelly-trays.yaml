@@ -1,22 +1,23 @@
+# assumes hub name is blinky-hub
 version: "3.7"
 services:
   blinky-shelly-trays:
     image: blinkylite/blinky-shelly-trays:${DOCKER_TAG}
     restart: unless-stopped
-    container_name: blinky-shelly-trays-01
+    container_name: blinky-shelly-trays
 #    ports:
 #      - "${NODEREDPORT}:60429"
     environment:
       - BOX=${BOX}
-      - MQTTCLIENTID=${MQTTCLIENTID}
-      - MQTTSERVERIP=${MQTTSERVERIP}
-      - MQTTUSERNAME=${MQTTUSERNAME}
-      - MQTTPASSWORD=${MQTTPASSWORD}
-      - MQTTPORT=${MQTTPORT}
-      - SHELLYMQTTLEAD=${SHELLYMQTTLEAD}
+      - MQTTCLIENTID=blinky-shelly-trays
+      - MQTTSERVERIP=blinky-mqtt
+      - MQTTUSERNAME=${BOX}
+      - MQTTPASSWORD=${BLINKYPASSWORD}
+      - MQTTPORT=1883
+      - SHELLYMQTTLEAD=shellies
       - ADMINNAME=admin
       - NODEREDPORT=60429
-      - ENABLE_NODERED_EDITOR=${ENABLE_NODERED_EDITOR}
+      - ENABLE_NODERED_EDITOR=0
 networks:
   default:
     name: tunnel
