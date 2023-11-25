@@ -15,7 +15,7 @@ services:
       - MQTTPASSWORD=${BLINKYPASSWORD}
       - MQTTPORT=1883
       - NODEREDPORT=60428
-      - ENABLE_NODERED_EDITOR=${ENABLE_NODERED_EDITOR}
+      - ENABLE_NODERED_EDITOR=0
 networks:
   default:
     name: tunnel
