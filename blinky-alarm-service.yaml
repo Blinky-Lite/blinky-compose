@@ -8,11 +8,11 @@ services:
 #      - "${NODEREDPORT}:60426"
     environment:
       - BOX=${BOX}
-      - MQTTCLIENTID=${MQTTCLIENTID}
+      - MQTTCLIENTID=${BOX}-alarm-service
       - MQTTSERVERIP=${MQTTSERVERIP}
       - MQTTUSERNAME=${MQTTUSERNAME}
       - MQTTPASSWORD=${MQTTPASSWORD}
-      - MQTTPORT=${MQTTPORT}
+      - MQTTPORT=1883
       - HUB=${HUB}
       - TELEGRAM_BOT=${TELEGRAM_BOT}
       - NODEREDPORT=60426
