@@ -9,7 +9,7 @@ services:
 #    ports:
 #      - "8888:8888"
     environment:
-      - JUPYTER_TOKEN=${BLINKYLITE_PASSWORD}
+      - JUPYTER_TOKEN=${BLINKYPASSWORD}
 networks:
   default:
     name: tunnel
