@@ -1,4 +1,3 @@
-# assumes hub name is blinky-hub
 version: "3.7"
 services:
   blinky-shelly-trays:
@@ -14,7 +13,7 @@ services:
       - MQTTUSERNAME=${BOX}
       - MQTTPASSWORD=${BLINKYPASSWORD}
       - MQTTPORT=1883
-      - SHELLYMQTTLEAD=shellies
+      - SHELLYMQTTLEAD=shellies/${HUB}
       - ADMINNAME=admin
       - NODEREDPORT=60429
       - ENABLE_NODERED_EDITOR=0
