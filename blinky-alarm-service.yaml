@@ -16,7 +16,7 @@ services:
       - HUB=${HUB}
       - TELEGRAM_BOT=${TELEGRAM_BOT}
       - NODEREDPORT=60426
-      - ENABLE_NODERED_EDITOR=${ENABLE_NODERED_EDITOR}
+      - ENABLE_NODERED_EDITOR=0
 networks:
   default:
     name: tunnel
