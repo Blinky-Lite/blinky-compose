@@ -3,15 +3,15 @@ services:
   blinky-alarm-service:
     image: blinkylite/blinky-alarm-service:${DOCKER_TAG}
     restart: unless-stopped
-    container_name: blinky-alarm-service
+    container_name: ${ALARMBOTNAME}-alarm-service
 #    ports:
 #      - "${NODEREDPORT}:60426"
     environment:
       - BOX=${BOX}
-      - MQTTCLIENTID=${BOX}-alarm-service
-      - MQTTSERVERIP=${MQTTSERVERIP}
-      - MQTTUSERNAME=${MQTTUSERNAME}
-      - MQTTPASSWORD=${MQTTPASSWORD}
+      - MQTTCLIENTID=${ALARMBOTNAME}-alarm-service
+      - MQTTSERVERIP=blinky-mqtt
+      - MQTTUSERNAME=${BOX}
+      - MQTTPASSWORD=${BLINKYPASSWORD}
       - MQTTPORT=1883
       - HUB=${HUB}
       - TELEGRAM_BOT=${TELEGRAM_BOT}
