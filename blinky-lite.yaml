@@ -86,8 +86,6 @@ services:
 volumes:
   mongo-data:
     driver: local  
-  notebooks:
-    driver: local  
 networks:
   default:
     name: tunnel
