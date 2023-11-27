@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     container_name: blinky-json-echo-trays-${TRAY_TYPE}
 #    ports:
-#      - "${NODEREDPORT}:60437"
+#      - "60437:60437"
     environment:
       - BOX=${BOX}
       - TRAY_TYPE=${TRAY_TYPE}
@@ -14,10 +14,10 @@ services:
       - MQTTUSERNAME=${BOX}
       - MQTTPASSWORD=${BLINKYPASSWORD}
       - MQTTPORT=1883
-      - MQTTHUB=blinky-hub
+      - MQTTHUB=${HUB}
       - ADMINNAME=admin
       - NODEREDPORT=60437
-      - ENABLE_NODERED_EDITOR=${ENABLE_NODERED_EDITOR}
+      - ENABLE_NODERED_EDITOR=0
 networks:
   default:
     name: tunnel
