@@ -23,7 +23,8 @@ echo \
   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 sudo apt-get -y update
 sudo apt-get -y install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-#sudo usermod -aG docker $USER
+sudo usermod -aG docker $USER
+source ./.bashrc
 sudo docker network create tunnel 
 sudo apt -y install apache2-utils 
 wget https://github.com/Blinky-Lite/blinky-compose/raw/main/scripts/startPortainer.sh
