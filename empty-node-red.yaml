@@ -1,0 +1,22 @@
+version: "3.4"
+  
+services:
+  web:
+    image: blinkylite/empty-node-red:${DOCKER_TAG}
+    container_name: ${LABEL}
+    ports:
+      - "60427:60427"
+    volumes:
+      - ${LABEL}:/data
+    environment:
+      - NODEREDPORT=60427
+      - ENABLE_NODERED_EDITOR=1
+      - NODE_RED_TITLE=${LABEL}
+      - HTMLSTATICDIR=/data/html-static/
+volumes:
+  ${LABEL}:
+    driver: local  
+networks:
+  default:
+    name: tunnel
+    external: true
