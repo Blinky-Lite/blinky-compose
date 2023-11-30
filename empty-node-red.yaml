@@ -4,6 +4,7 @@ services:
   web:
     image: blinkylite/empty-node-red:${DOCKER_TAG}
     container_name: empty-node-red
+    restart: unless-stopped
 #    ports:
 #      - "60427:60427"
     volumes:
