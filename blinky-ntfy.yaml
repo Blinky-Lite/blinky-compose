@@ -1,0 +1,35 @@
+version: "3.4"
+
+services:
+  ntfy:
+    image: blinkylite/blinky-ntfy:${DOCKER_TAG}
+    container_name: blinky-ntfy
+    command:
+      - serve
+    environment:
+      NTFY_BASE_URL: http://ntfy:80
+      NTFY_CACHE_FILE: /var/lib/ntfy/cache.db
+      NTFY_AUTH_FILE: /var/lib/ntfy/auth.db
+      NTFY_AUTH_DEFAULT_ACCESS: deny-all
+      NTFY_BEHIND_PROXY: true
+      NTFY_ATTACHMENT_CACHE_DIR: /var/lib/ntfy/attachments
+      NTFY_ENABLE_LOGIN: true
+    volumes:
+      - var-lib-ntfy:/var/lib/ntfy
+      - var-cache-ntfy:/var/cache/ntfy
+      - etc-ntfy:/etc/ntfy
+    ports:
+      - 8080:80
+    restart: unless-stopped
+volumes:
+  var-cache-ntfy:
+    driver: local  
+  etc-ntfy:
+    driver: local  
+  var-lib-ntfy:
+    driver: local  
+networks:
+  default:
+    name: tunnel
+    external: true
+

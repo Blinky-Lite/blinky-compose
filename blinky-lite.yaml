@@ -1,5 +1,25 @@
 version: "3.7"
 services:
+  ntfy:
+    image: blinkylite/blinky-ntfy:${DOCKER_TAG}
+    container_name: blinky-ntfy
+    command:
+      - serve
+    environment:
+      NTFY_BASE_URL: http://ntfy:80
+      NTFY_CACHE_FILE: /var/lib/ntfy/cache.db
+      NTFY_AUTH_FILE: /var/lib/ntfy/auth.db
+      NTFY_AUTH_DEFAULT_ACCESS: deny-all
+      NTFY_BEHIND_PROXY: true
+      NTFY_ATTACHMENT_CACHE_DIR: /var/lib/ntfy/attachments
+      NTFY_ENABLE_LOGIN: true
+    volumes:
+      - var-lib-ntfy:/var/lib/ntfy
+      - var-cache-ntfy:/var/cache/ntfy
+      - etc-ntfy:/etc/ntfy
+#    ports:
+#      - 8080:80
+    restart: unless-stopped
   mongo:
     image: blinkylite/blinky-mongo:${DOCKER_TAG}
     restart: unless-stopped
@@ -85,6 +105,12 @@ services:
       start_period: 3s
 volumes:
   mongo-data:
+    driver: local  
+  var-cache-ntfy:
+    driver: local  
+  etc-ntfy:
+    driver: local  
+  var-lib-ntfy:
     driver: local  
 networks:
   default:
