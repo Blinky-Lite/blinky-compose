@@ -86,12 +86,6 @@ services:
 volumes:
   mongo-data:
     driver: local  
-  var-cache-ntfy:
-    driver: local  
-  etc-ntfy:
-    driver: local  
-  var-lib-ntfy:
-    driver: local  
 networks:
   default:
     name: tunnel
