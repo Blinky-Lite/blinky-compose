@@ -1,0 +1,16 @@
+version: "3.4"
+  
+services:
+  web:
+    image: blinkylite/blinky-nginx:amd64
+    container_name: blinky-nginx
+    restart: unless-stopped
+    volumes:
+      - "./nginx-init.conf:/etc/nginx/conf.d/nginx-init.conf"
+    ports:
+      - "80:80"
+networks:
+  default:
+    name: tunnel
+    external: true
+
