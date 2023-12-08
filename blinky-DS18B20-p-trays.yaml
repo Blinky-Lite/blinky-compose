@@ -1,0 +1,25 @@
+version: "3.7"
+services:
+  blinky-leak-trays:
+    image: blinkylite/blinky-ds18b20-p-trays:${DOCKER_TAG}
+    restart: unless-stopped
+    container_name: blinky-ds18b20-p-trays
+#    ports:
+#      - "${NODEREDPORT}:60430"
+    environment:
+      - BOX=${BOX}
+      - TRAYTYPE=blinky-DS18B20-p
+      - MQTTCLIENTID=${BOX}-blinky-DS18B20-p
+      - MQTTSERVERIP=blinky-mqtt
+      - MQTTUSERNAME=${BOX}
+      - MQTTPASSWORD=${BLINKYPASSWORD}
+      - MQTTPORT=1883
+      - NODEREDPORT=60430
+      - ENABLE_NODERED_EDITOR=0
+      - PYTHONCUBETYPE=0
+networks:
+  default:
+    name: tunnel
+    external: true
+
+
