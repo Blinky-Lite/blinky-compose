@@ -1,0 +1,25 @@
+version: "3.7"
+services:
+  lansitec_th-trays:
+    image: blinkylite/lansitec_th-trays:${DOCKER_TAG}
+    restart: unless-stopped
+    container_name: lansitec_th-trays
+#    ports:
+#      - "${NODEREDPORT}:60430"
+    environment:
+      - BOX=${BOX}
+      - TRAYTYPE=lansitecTH
+      - MQTTCLIENTID=${BOX}-lansitecTH-trays
+      - MQTTSERVERIP=blinky-mqtt
+      - MQTTUSERNAME=${BOX}
+      - MQTTPASSWORD=${BLINKYPASSWORD}
+      - MQTTPORT=1883
+      - NODEREDPORT=60430
+      - LORAWAN=${LORAWAN}
+      - ENABLE_NODERED_EDITOR=0
+networks:
+  default:
+    name: tunnel
+    external: true
+
+
