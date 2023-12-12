@@ -8,7 +8,8 @@ services:
 #      - "${NODEREDPORT}:60430"
     environment:
       - BOX=${BOX}
-      - TRAYTYPE=lansitecTH
+      - TRAYTYPE_1=lansitecTH
+      - TRAYTYPE_2=lora-temp
       - MQTTCLIENTID=${BOX}-lansitecTH-trays
       - MQTTSERVERIP=blinky-mqtt
       - MQTTUSERNAME=${BOX}
