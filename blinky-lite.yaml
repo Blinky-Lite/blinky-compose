@@ -85,18 +85,8 @@ services:
       timeout: 3s
       retries: 15
       start_period: 3s
-  blinky-nginx:
-    image: blinkylite/blinky-nginx:${DOCKER_TAG}
-    container_name: blinky-nginx
-    restart: unless-stopped
-    volumes:
-      - nginx-confd:/etc/nginx/conf.d
-    ports:
-      - "80:80"
 volumes:
   mongo-data:
-    driver: local  
-  nginx-confd:
     driver: local  
 networks:
   default:
