@@ -78,15 +78,25 @@ services:
       - NODEREDPORT=60427
       - HTMLSTATICDIR=/data/html-static
       - REQUIREHTTPS=0
-      - ENABLE_NODERED_EDITOR=0
+      - ENABLE_NODERED_EDITOR=1
     healthcheck:
       test: curl --fail http://localhost:60427/health || exit 1
       interval: 3s
       timeout: 3s
       retries: 15
       start_period: 3s
+  blinky-nginx:
+    image: blinkylite/blinky-nginx:${DOCKER_TAG}
+    container_name: blinky-nginx
+    restart: unless-stopped
+    volumes:
+      - nginx-confd:/etc/nginx/conf.d
+    ports:
+      - "80:80"
 volumes:
   mongo-data:
+    driver: local  
+  nginx-confd:
     driver: local  
 networks:
   default:
