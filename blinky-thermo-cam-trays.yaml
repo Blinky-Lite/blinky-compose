@@ -1,22 +1,22 @@
 version: "3.7"
 services:
-  blinky-ds18b20-p-trays:
-    image: blinkylite/blinky-ds18b20-p-trays:${DOCKER_TAG}
+  blinky-thermo-cam-trays:
+    image: blinkylite/blinky-thermo-cam-trays:${DOCKER_TAG}
     restart: unless-stopped
-    container_name: blinky-ds18b20-p-trays
+    container_name: blinky-thermo-cam-trays
 #    ports:
 #      - "${NODEREDPORT}:60430"
     environment:
       - BOX=${BOX}
-      - TRAYTYPE=blinky-DS18B20-p
-      - MQTTCLIENTID=${BOX}-blinky-DS18B20-p
+      - TRAYTYPE=blinky-thermo-cam
+      - MQTTCLIENTID=${BOX}-blinky-thermo-cam
       - MQTTSERVERIP=blinky-mqtt
       - MQTTUSERNAME=${BOX}
       - MQTTPASSWORD=${BLINKYPASSWORD}
       - MQTTPORT=1883
       - NODEREDPORT=60430
+      - HUB=${HUB}
       - ENABLE_NODERED_EDITOR=0
-      - PYTHONCUBETYPE=0
 networks:
   default:
     name: tunnel
