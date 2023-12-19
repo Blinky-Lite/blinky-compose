@@ -1,0 +1,27 @@
+version: "3.7"
+services:
+  maxiv-ntfy-alarm-service:
+    image: blinkylite/maxiv-ntfy-alarm-service:${DOCKER_TAG}
+    restart: unless-stopped
+    container_name: maxiv-ntfy-alarm-service
+#    ports:
+#      - "${NODEREDPORT}:60426"
+    environment:
+      - TRAYTYPEFILTER=${TRAYTYPEFILTER}
+      - MAXIV_NTFY_URL=${MAXIV_NTFY_URL}
+      - CALLBACKURL=${CALLBACKURL}
+      - BOX=${BOX}
+      - MQTTCLIENTID=maxiv-ntfy-alarm-service
+      - MQTTSERVERIP=blinky-mqtt
+      - MQTTUSERNAME=${BOX}
+      - MQTTPASSWORD=${BLINKYPASSWORD}
+      - MQTTPORT=1883
+      - HUB=${HUB}
+      - NODEREDPORT=60426
+      - ENABLE_NODERED_EDITOR=0
+networks:
+  default:
+    name: tunnel
+    external: true
+
+
