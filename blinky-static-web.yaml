@@ -1,0 +1,22 @@
+version: "3.7"
+  
+services:
+  web:
+    image: blinkylite/blinky-static-web:${DOCKER_TAG}
+    container_name: blinky-static-web
+    restart: unless-stopped
+    ports:
+      - "60427:60427"
+    environment:
+      - NODEREDPORT=60427
+      - ENABLE_NODERED_EDITOR=1
+      - NODE_RED_TITLE=blinky-static-web
+      - GIT_REPO_URL=${GIT_REPO_URL}
+      - GIT_STATIC_CONTENT=${GIT_STATIC_CONTENT}
+      - HTMLSTATICDIR=${HTMLSTATICDIR}
+      - GIT_BRANCH=${GIT_BRANCH}
+networks:
+  default:
+    name: tunnel
+    external: true
+
