@@ -1,0 +1,28 @@
+version: "3.7"
+  
+services:
+  web:
+    image: blinkylite/ls224controller:${DOCKER_TAG}
+    container_name: ls224controller-${CONTROLLER_NAME}
+    restart: unless-stopped
+#    ports:
+#      - "60427:60427"
+    environment:
+      - BOX=${BOX}
+      - MQTTCLIENTID=ls224controller-${CONTROLLER_NAME}
+      - MQTTSERVERIP=blinky-mqtt
+      - MQTTUSERNAME=${BOX}
+      - MQTTPASSWORD=${BLINKYLITE_PASSWORD}
+      - MQTTPORT=1883
+      - CONTROLLER_NAME=${CONTROLLER_NAME}
+      - CONTROLLER_IP=${CONTROLLER_IP}
+      - CONTROLLER_PORT=7777
+      - ADMIN_TRAY_NAME=${CONTROLLER_NAME}-admin
+      - NODEREDPORT=60427
+      - ENABLE_NODERED_EDITOR=1
+      - NODE_RED_TITLE=ls224controller
+      - HTMLSTATICDIR=/data/html-static/
+networks:
+  default:
+    name: tunnel
+    external: true
