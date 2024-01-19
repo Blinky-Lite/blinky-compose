@@ -25,9 +25,9 @@ services:
       - SERIALPORT=${SERIALPORT}
       - NODEREDPORT=1881
       - ENABLE_NODERED_EDITOR=${ENABLE_NODERED_EDITOR}
-#networks:
-#  default:
-#    name: tunnel
-#    external: true
+networks:
+  default:
+    name: tunnel
+    external: true
 
 
