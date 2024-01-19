@@ -7,7 +7,7 @@ services:
     group_add:
       - dialout
     devices:
-      - ${SERIALPORT}:/dev/ttyACM0
+      - ${SERIALPORT_PATH}:${SERIALPORT}
     ports:
       - "${NODEREDPORT}:1881"
     environment:
@@ -22,12 +22,12 @@ services:
       - SERIALBUFSIZE=${SERIALBUFSIZE}
       - POLLINTERVAL=${POLLINTERVAL}
       - BAUDRATE=${BAUDRATE}
-      - SERIALPORT=/dev/ttyACM0
+      - SERIALPORT=${SERIALPORT}
       - NODEREDPORT=1881
       - ENABLE_NODERED_EDITOR=${ENABLE_NODERED_EDITOR}
-networks:
-  default:
-    name: tunnel
-    external: true
+#networks:
+#  default:
+#    name: tunnel
+#    external: true
 
 
