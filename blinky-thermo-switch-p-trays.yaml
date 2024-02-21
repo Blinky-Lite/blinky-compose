@@ -1,0 +1,24 @@
+version: "3.7"
+services:
+  blinky-thermo-switch-p-trays:
+    image: blinkylite/blinky-thermo-switch-p-trays:${DOCKER_TAG}
+    restart: unless-stopped
+    container_name: blinky-thermo-switch-p-trays
+#    ports:
+#      - "${NODEREDPORT}:60430"
+    environment:
+      - BOX=${BOX}
+      - TRAYTYPE=blinky-thermo-switch-p
+      - MQTTCLIENTID=${BOX}-blinky-thermo-switch-p
+      - MQTTSERVERIP=blinky-mqtt
+      - MQTTUSERNAME=${BOX}
+      - MQTTPASSWORD=${BLINKYPASSWORD}
+      - MQTTPORT=1883
+      - NODEREDPORT=60430
+      - ENABLE_NODERED_EDITOR=0
+networks:
+  default:
+    name: tunnel
+    external: true
+
+
