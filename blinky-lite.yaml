@@ -99,7 +99,7 @@ services:
       - NODEREDPORT=60427
       - HTMLSTATICDIR=/data/html-static
       - REQUIREHTTPS=0
-      - ENABLE_NODERED_EDITOR=1
+      - ENABLE_NODERED_EDITOR=0
     healthcheck:
       test: curl --fail http://localhost:60427/health || exit 1
       interval: 3s
