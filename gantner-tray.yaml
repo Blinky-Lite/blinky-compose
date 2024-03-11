@@ -1,0 +1,28 @@
+version: "3.7"
+services:
+  gantner-iter-tray:
+    image: blinkylite/gantner-tray:${DOCKER_TAG}
+    restart: unless-stopped
+    container_name: gantner-${TRAYNAME}
+#    ports:
+#      - "1880:1880"
+    environment:
+      - BOX=${BOX}
+      - TRAYTYPE=gantner
+      - TRAYNAME=${TRAYNAME}
+      - MQTTCLIENTID=gantner-${TRAYNAME}
+      - MQTTSERVERIP=${MQTTSERVERIP}
+      - MQTTUSERNAME=${MQTTUSERNAME}
+      - MQTTPASSWORD=${MQTTPASSWORD}
+      - MQTTPORT=1883
+      - MODBUSIP=${MODBUSIP}
+      - MODBUSPORT=10000
+      - NODEREDPORT=1880
+      - INTERVAL=${INTERVAL}
+      - ENABLE_NODERED_EDITOR=0
+networks:
+  default:
+    name: tunnel
+    external: true
+
+
