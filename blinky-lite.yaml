@@ -16,8 +16,8 @@ services:
   blinky-filebrowser:
     image: blinkylite/filebrowser:${DOCKER_TAG}
     restart: unless-stopped
-#    ports:
-#      - "8080:8080"
+    ports:
+      - "8080:8080"
     container_name: blinky-filebrowser
     volumes:
       - extra-img:/srv
@@ -112,8 +112,8 @@ services:
     restart: unless-stopped
     volumes:
       - nginx-confd:/etc/nginx/conf.d
-#    ports:
-#      - "80:80"
+    ports:
+      - "80:80"
 volumes:
   mongo-data:
     driver: local  
