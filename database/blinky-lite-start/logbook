@@ -1,1 +1,3 @@
 {"_id":{"$oid":"6558dc9c263a0f4e7d62a7d3"},"timeStamp":1700806732667,"author":"aeinstein","title":"My first entry","text":"This my first entry"}
+{"_id":{"$oid":"65a414bca0f79eb13c6573ab"},"timeStamp":1705252028699,"author":"aeinstein","title":"test","text":"test"}
+{"_id":{"$oid":"65a41904a0f79eb13c6573b5"},"timeStamp":1705253124463,"author":"aeinstein","title":"test5","text":"grt"}
