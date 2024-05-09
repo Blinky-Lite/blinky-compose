@@ -5,17 +5,17 @@ services:
     restart: unless-stopped
     container_name: blinky-max31865-trays
 #    ports:
-#      - "${NODEREDPORT}:60428"
+#      - "60432:60432"
     environment:
       - BOX=${BOX}
-      - TRAYTYPE=${TRAYTYPE}
-      - MQTTCLIENTID=${BOX}-${TRAYTYPE}
-      - MQTTSERVERIP=${MQTTSERVERIP}
+      - TRAYTYPE=blinky-MAX31865
+      - MQTTCLIENTID=${BOX}-blinky-MAX31865
+      - MQTTSERVERIP=blinky-mqtt
       - MQTTUSERNAME=${BOX}
-      - MQTTPASSWORD=${MQTTPASSWORD}
-      - MQTTPORT=${MQTTPORT}
-      - NODEREDPORT=60428
-      - ENABLE_NODERED_EDITOR=${ENABLE_NODERED_EDITOR}
+      - MQTTPASSWORD=${BLINKYPASSWORD}
+      - MQTTPORT=1883
+      - NODEREDPORT=60432
+      - ENABLE_NODERED_EDITOR=0
 networks:
   default:
     name: tunnel
