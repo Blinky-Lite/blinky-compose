@@ -1,0 +1,27 @@
+version: "3.7"
+services:
+  bl-iwa-station-trays:
+    image: blinkylite/bl-iwa-station-trays:${DOCKER_TAG}
+    restart: unless-stopped
+    container_name: bl-iwa-station-trays
+#    ports:
+#      - "60428:60428"
+    environment:
+      - BOX=${BOX}
+      - TRAYTYPE=bl-iwa-station
+      - BADGETYPE=bl-iwa-badge
+      - MQTTCLIENTID=bl-iwa-station-trays
+      - MQTTSERVERIP=blinky-mqtt
+      - MQTTUSERNAME=${BOX}
+      - MQTTPASSWORD=${BLINKYPASSWORD}
+      - MQTTPORT=1883
+      - NTFYIP=blinky-ntfy:80
+      - NTFYUSERNAME=admin
+      - NTFYPASSWORD=${BLINKYPASSWORD}
+      - NODEREDPORT=60428
+      - ENABLE_NODERED_EDITOR=0
+networks:
+  default:
+    name: tunnel
+    external: true
+
