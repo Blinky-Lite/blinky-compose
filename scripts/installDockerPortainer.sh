@@ -27,7 +27,7 @@ sudo usermod -aG docker $USER
 source ./.bashrc
 sudo docker network create tunnel 
 sudo apt -y install apache2-utils 
-wget https://github.com/Blinky-Lite/blinky-compose/raw/main/scripts/startPortainer.sh
+wget https://raw.githubusercontent.com/Blinky-Lite/blinky-compose/main/scripts/startPortainer.sh
 chmod +x startPortainer.sh 
 ./startPortainer.sh $1
 echo '....Finished installing docker..serving Portainer on port 9000' 
