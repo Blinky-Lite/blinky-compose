@@ -15,4 +15,4 @@ echo "Restoring blinky-mongo database..."
 tar xvfz blinky-lite_mongo-data.tar
 docker exec -i blinky-mongo /usr/bin/mongorestore --username admin --password $2 --authenticationDatabase admin --nsInclude="blinky-lite.*" --archive < mongodb
 rm mongodb
-echo "...Finished restorign blinky-lite_mongo-data database" 
+echo "...Finished restoring blinky-lite_mongo-data database" 
