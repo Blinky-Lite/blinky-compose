@@ -1,5 +1,9 @@
 #!/bin/bash
-
+if [ "$#"  -ne 1 ]
+then
+    echo "Usage: ./runbackup.sh <databasePassword>"
+    exit 1
+fi
 remoteDirName=$(hostname)-$(date +"%y-%m-%d")
 echo "Creating backup " $remoteDirName
 mkdir  $remoteDirName
@@ -11,9 +15,10 @@ docker run --rm --volumes-from extra-img -v $(pwd):/backup busybox tar cvfz /bac
 echo "...Finished copying blinky-lite_extra-img database" 
 mv backup.tar  blinky-lite_extra-img.tar
 echo "Copying blinky-lite_mongo-data database..."
-docker run --rm --volumes-from blinky-mongo -v $(pwd):/backup busybox tar cvfz /backup/backup.tar /data/db
+docker exec -i blinky-mongo /usr/bin/mongodump --username admin --password $1 --authenticationDatabase admin --db blinky-lite --archive > mongodb
+tar cvfz blinky-lite_mongo-data.tar mongodb
+rm mongodb
 echo "...Finished copying blinky-lite_mongo-data database" 
-mv backup.tar  blinky-lite_mongo-data.tar
 echo "Exporting to Google Drive..."
 rclone copy . google-drive:$remoteDirName
 echo "...Finished export to Google Drive"
