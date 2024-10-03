@@ -1,18 +1,5 @@
 version: "3.7"
 services:
-  extra-img:
-    image: blinkylite/empty-node-red:${DOCKER_TAG}
-    container_name: extra-img
-    restart: unless-stopped
-#    ports:
-#      - "60427:60427"
-    volumes:
-      - extra-img:/data/html-static
-    environment:
-      - NODEREDPORT=60427
-      - ENABLE_NODERED_EDITOR=0
-      - NODE_RED_TITLE=extra-img
-      - HTMLSTATICDIR=/data/html-static/
   blinky-filebrowser:
     image: blinkylite/filebrowser:${DOCKER_TAG}
     restart: unless-stopped
@@ -76,6 +63,8 @@ services:
     image: blinkylite/blinky-box:${DOCKER_TAG}
     restart: unless-stopped
     container_name: blinky-box
+    volumes:
+      - extra-img:/data/html-static
     depends_on:
       mongo:
         condition: service_healthy
@@ -99,7 +88,8 @@ services:
       - NODEREDPORT=60427
       - HTMLSTATICDIR=/data/html-static
       - REQUIREHTTPS=0
-      - ENABLE_NODERED_EDITOR=0
+      - ENABLE_NODERED_EDITOR=1
+      - CUSTOM_LAUNCH=${CUSTOM_LAUNCH}
     healthcheck:
       test: curl --fail http://localhost:60427/health || exit 1
       interval: 3s
@@ -125,4 +115,5 @@ networks:
   default:
     name: tunnel
     external: true
+
 
