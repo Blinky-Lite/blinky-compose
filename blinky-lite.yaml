@@ -13,8 +13,8 @@ services:
     restart: unless-stopped
     command: mongod --quiet --logpath /dev/null
     container_name: blinky-mongo
-#    ports:
-#      - "27017:27017"
+    ports:
+      - "27017:27017"
     volumes:
       - mongo-data:/data/db
     environment:
@@ -88,8 +88,11 @@ services:
       - NODEREDPORT=60427
       - HTMLSTATICDIR=/data/html-static
       - REQUIREHTTPS=0
-      - ENABLE_NODERED_EDITOR=1
+      - ENABLE_NODERED_EDITOR=${ENABLE_NODERED_EDITOR}
       - CUSTOM_LAUNCH=${CUSTOM_LAUNCH}
+      - GIT_REPO_URL=${GIT_REPO_URL}
+      - GIT_BRANCH=${GIT_BRANCH}
+      - GIT_STATIC_CONTENT=${GIT_STATIC_CONTENT}
     healthcheck:
       test: curl --fail http://localhost:60427/health || exit 1
       interval: 3s
@@ -115,5 +118,4 @@ networks:
   default:
     name: tunnel
     external: true
-
 
