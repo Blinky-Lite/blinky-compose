@@ -1,1 +1,1 @@
-/usr/bin/mongorestore -d blinky-lite /dump/blinky-lite
+/usr/bin/mongorestore --archive=/dump/mongodb --nsInclude="blinky-lite.*"
